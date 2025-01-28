@@ -59,7 +59,7 @@ exports.handler = async (event) => {
             // Console log simulando envio do e-mail
             console.log(`Simulated email to ${userEmail}:`);
             console.log(`Subject: Seu arquivo está pronto!`);
-            console.log(`Body: Olá, aqui estão os detalhes do seu arquivo: ID do Usuário: 123, e-mail: axel.kjellin.self@gmail.com`);
+            console.log(`Body: Olá, aqui estão os detalhes do seu arquivo:\n\nID do Usuário: ${id_usuario}\nLink: ${link_arquivo}`);
         } catch (error) {
             console.error(`Failed to process message for user: ${id_usuario}`, error);
         }
