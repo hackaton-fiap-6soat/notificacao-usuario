@@ -47,4 +47,5 @@ jobs:
 
     - name: Terraform Apply
       working-directory: terraform
-      run: terraform apply -auto-approve
+      run: terraform apply -var="cognito_user_pool_id=placeholder-pool-id" -auto-approve
+
