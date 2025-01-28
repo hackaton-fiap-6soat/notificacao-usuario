@@ -7,13 +7,12 @@ resource "aws_sqs_queue" "notification_queue" {
 }
 
 resource "aws_lambda_function" "notification_lambda" {
-  function_name = "notificationLambda"
-  runtime       = "nodejs18.x"
-  handler       = "index.handler"
-  role          = "arn:aws:iam::918602927576:role/LabRole"
-
-  filename         = "lambda_function_payload.zip"
-  source_code_hash = filebase64sha256("lambda_function_payload.zip")
+  function_name     = "notificationLambda"
+  runtime           = "nodejs18.x"
+  handler           = "index.handler"
+  role              = "arn:aws:iam::918602927576:role/LabRole"
+  filename          = "lambda_function_payload.zip"
+  source_code_hash  = filebase64sha256("lambda_function_payload.zip")
 
   environment {
     variables = {
