@@ -4,10 +4,10 @@ variable "cognito_user_pool_id" {
   default     = "placeholder-pool-id"
 }
 
-variable "ses_email_source" {
-  description = "O endereço de e-mail verificado no SES que será usado como remetente."
+variable "sqs_status_queue_url" {
+  description = "A URL da fila SQS onde serão enviados os status de erro e sucesso."
   type        = string
-  default     = "axel.kjellin.self@gmail.com"
+  default     = "sqs-status-queue-url"
 }
 
 variable "aws_region" {
