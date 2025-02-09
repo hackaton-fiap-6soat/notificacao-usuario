@@ -43,7 +43,7 @@ jobs:
 
     - name: Terraform Plan
       working-directory: terraform
-      run: terraform plan
+      run: terraform apply -var="aws_lambda_role_arn=${{ secrets.AWS_LAMBDA_ROLE_ARN }}" -var="cognito_user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" -var="sqs_status_queue_url=${{ secrets.SQS_STATUS_QUEUE_URL }}" -auto-approve
 
     - name: Terraform Apply
       working-directory: terraform
