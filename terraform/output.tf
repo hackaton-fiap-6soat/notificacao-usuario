@@ -4,7 +4,7 @@ output "sqs_queue_url" {
 }
 
 output "sqs_status_queue_url" {
-  value       = aws_sqs_queue.status_queue.id
+  value       = var.sqs_status_queue_url
   description = "URL da fila de status SQS para registrar sucesso ou erro."
 }
 
