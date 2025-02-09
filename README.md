@@ -5,13 +5,13 @@ Este projeto implementa um serviço de notificação que utiliza os seguintes re
 - **SQS**: Fila para receber mensagens com informações do usuário e link de arquivos.
 O formato da mensagem JSON { "id_usuario": "U12346", "link_arquivo": "http://amazon-us-xxxxxxxxx" }
 
-- **Lambda**: Processa eventos do SQS, consulta o Cognito para buscar o e-mail do usuário e envia notificações por e-mail utilizando o SES.
+- **Lambda**: Processa eventos do SQS, consulta o Cognito para buscar o e-mail do usuário e simula um envio de email para o usuário via console.log(), isso precisa ser simulado pois a AWS Academy não possui suporte para usar algum serviço de e-mail como o SES ou o Sendgrid, após a simulação de envio caso tenhamos sucesso no envio do e-mail é enviado para um SQS de gerenciamento de processamento um sucesso de envio de e-mail para o usuário, caso tenha um erro é enviado o erro.
 - **Cognito**: Utilizado para buscar o e-mail do usuário com base no `id_usuario`.
-- **SES**: Serviço de envio de e-mails.
 
 ## Alterações Necessárias
 1. **Cognito**:
    - Substitua `<COGNITO_USER_POOL_ID>` na variável de ambiente `COGNITO_USER_POOL_ID` pelo ID do User Pool que será fornecido.
+   - Essa variavel de ambiente, está configurado no git actions, para fins de testes precisa colocar manualmente.
 
 3. **Variáveis de Ambiente**:
    - Configure as variáveis no Terraform para ajustar as configurações de SES e Cognito.
@@ -72,10 +72,7 @@ aws sqs send-message \
   --message-body '{"id_usuario": "U12349", "link_arquivo": "http://amazon-us-yyyyyyyy"}'
 ```
 
-<!-- usuario_id = 12314234 | link: 'https://teste -->
-<!-- usuario_id 12314234 | email = axel@tesdte.com  -->
-
 ### Init com variaveis:
 ```bash
-terraform apply -var="cognito_user_pool_id=placeholder-pool-id" -var="ses_email_source=axel.tank.kjellin@gmail.com"
+terraform apply -var="cognito_user_pool_id=placeholder-pool-id" -var="sqs_status_queue_url=sqs-status-queue-url" -auto-approve
 ```

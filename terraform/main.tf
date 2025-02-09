@@ -16,7 +16,9 @@ resource "aws_lambda_function" "notification_lambda" {
 
   environment {
     variables = {
-      SQS_QUEUE_URL = aws_sqs_queue.notification_queue.id
+      SQS_QUEUE_URL        = aws_sqs_queue.notification_queue.id
+      SQS_STATUS_QUEUE_URL = var.sqs_status_queue_url
+      COGNITO_USER_POOL_ID = var.cognito_user_pool_id
     }
   }
 }
