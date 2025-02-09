@@ -15,3 +15,8 @@ variable "aws_region" {
   type        = string
   default     = "us-east-1"
 }
+
+variable "aws_lambda_role_arn" {
+  description = "ARN da IAM Role para a AWS Lambda"
+  type        = string
+}
