@@ -39,12 +39,12 @@ jobs:
 
     - name: Terraform Init
       working-directory: terraform
-      run: terraform init
+      run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" -backend-config="key=fiap.hackathon.notification.infra.tfstate" -backend-config="region=us-east-1"
 
     - name: Terraform Plan
       working-directory: terraform
-      run: terraform apply -var="aws_lambda_role_arn=${{ secrets.AWS_LAMBDA_ROLE_ARN }}" -var="cognito_user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" -var="sqs_status_queue_url=${{ secrets.SQS_STATUS_QUEUE_URL }}" -auto-approve
+      run: terraform plan -var="cognito_user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" -var="sqs_status_queue_url=${{ secrets.SQS_STATUS_QUEUE_URL }}" -auto-approve
 
     - name: Terraform Apply
       working-directory: terraform
-      run: terraform apply -var="aws_lambda_role_arn=${{ secrets.AWS_LAMBDA_ROLE_ARN }}" -var="cognito_user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" -var="sqs_status_queue_url=${{ secrets.SQS_STATUS_QUEUE_URL }}" -auto-approve
+      run: terraform apply -var="cognito_user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" -var="sqs_status_queue_url=${{ secrets.SQS_STATUS_QUEUE_URL }}" -auto-approve
